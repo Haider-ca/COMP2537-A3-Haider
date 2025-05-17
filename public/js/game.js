@@ -1,5 +1,3 @@
-// public/js/game.js
-
 const board = document.getElementById('game-board');
 const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
@@ -22,14 +20,14 @@ const totalPairsEl = document.getElementById('total-pairs');
 const remainingEl = document.getElementById('remaining');
 const timerEl = document.getElementById('timer');
 
-/** Fetch all Pokémon names (limit 1500) */
+// Fetch all Pokémon names (limit 1500)
 async function fetchAllPokemon() {
   const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1500');
   const data = await res.json();
   return data.results.map(p => p.name);
 }
 
-/** Get best sprite or fallback */
+// Get best sprite or fallback 
 async function getSprite(name) {
   try {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -40,10 +38,10 @@ async function getSprite(name) {
   } catch (e) {
     console.warn(`Error fetching ${name}`, e);
   }
-  return '/images/poke-ball.png'; // our local fallback
+  return '/images/poke-ball.png';
 }
 
-/** Fisher–Yates */
+// Shuffle function
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -52,7 +50,7 @@ function shuffle(arr) {
   return arr;
 }
 
-/** Build / rebuild board, but only with real-sprite Pokémon */
+// Set up the Board
 async function setupBoard() {
     messageEl.innerHTML = '';
   clearInterval(timerInterval);
@@ -81,12 +79,9 @@ async function setupBoard() {
   remainingEl.textContent = totalPairs - matched;
   board.className = '';
   board.style.display = 'grid';
-  // Exactly 'cols' columns at the card size
   board.style.gridTemplateColumns = `repeat(${cols}, var(--card-size))`;
-  // 0.5rem vertical gap, 0.25rem horizontal gap
   board.style.rowGap = '0.5rem';
   board.style.columnGap = '0.25rem';
-  // Center the whole board block if it's narrower than its container
   board.style.justifyContent = 'center';
   updateTimerDisplay();
 
@@ -128,7 +123,7 @@ async function setupBoard() {
   gameActive = true;
 }
 
-/** Handle flip logic */
+// Handle flip logic 
 function onCardClick(card) {
   if (!gameActive || isBusy || card.classList.contains('flipped') || matched === totalPairs) return;
   card.classList.add('flipped');
@@ -164,7 +159,7 @@ function resetSelection() {
   isBusy = false;
 }
 
-/** Timer & endgame */
+// Timer & endgame 
 function startTimer() {
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
@@ -191,7 +186,6 @@ function endGame(win) {
     ? 'You matched all the cards! Great job!'
     : 'Time’s up! Better luck next time.';
 
-  // Inject it
   messageEl.innerHTML = `
     <div class="alert alert-${type} alert-dismissible fade show" role="alert">
       <strong>${icon} ${heading}</strong> ${text}
@@ -201,7 +195,7 @@ function endGame(win) {
 }
 
 
-/** Power-up */
+// Power-up 
 powerupBtn.addEventListener('click', () => {
   if (!gameActive || powerupsUsed >= maxPowerups) return;
   powerupsUsed++;
@@ -217,12 +211,12 @@ powerupBtn.addEventListener('click', () => {
   }, 2000);
 });
 
-/** Theme switch */
+// Theme switch 
 themeSelect.addEventListener('change', () => {
   document.body.className = `${themeSelect.value}-theme`;
 });
 
-/** Controls */
+// Controls
 startBtn.addEventListener('click', setupBoard);
 resetBtn.addEventListener('click', setupBoard);
 diffSelect.addEventListener('change', setupBoard);

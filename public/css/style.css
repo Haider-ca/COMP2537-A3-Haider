@@ -41,21 +41,19 @@ body.dark-theme {
   background-color: #fff;
   border-radius: .5rem;
 }
-/* 1) Make the outer card box invisible */
+
 #game-board .card {
   background: transparent !important;
   border: none      !important;
   box-shadow: none  !important;
 }
 
-/* 2) Keep the Poké-ball visible on the back face */
 #game-board .card-back {
   /* your local ball image */
   background: url('/images/poke-ball.png') center center / contain no-repeat !important;
   background-color: transparent !important;
 }
 
-/* 3) Ensure the front face (actual Pokémon) has no backdrop */
 #game-board .card-front {
   background: transparent !important;
 }
