@@ -4,18 +4,14 @@
   "description": "Pokémon Memory Card Game (COMP2537 A3)",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev":   "nodemon server.js",
-    "build": "echo \"no build needed\""
+    "start": "node server.js",           
+    "dev":   "nodemon server.js",       
+    "build": "node scripts/render-index.js"  
   },
-  "keywords": [],
   "author": "Haider Al-Sudani",
   "license": "ISC",
   "dependencies": {
-    "ejs":             "^3.1.10",
-    "express":         "^5.1.0",
-    "serverless-http":"^3.2.0"
+    "ejs": "^3.1.10"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
