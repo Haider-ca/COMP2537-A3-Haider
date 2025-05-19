@@ -52,16 +52,16 @@ function shuffle(arr) {
 
 // Set up the Board
 async function setupBoard() {
-    messageEl.innerHTML = '';
+  messageEl.innerHTML = '';
   clearInterval(timerInterval);
-  isBusy     = false;
+  isBusy = false;
   gameActive = false;
   board.innerHTML = '';
-   clicks = matched = 0;
-  clicksEl.textContent  = 0;
+  clicks = matched = 0;
+  clicksEl.textContent = 0;
   matchedEl.textContent = 0;
-  powerupsUsed          = 0;
-  powerupBtn.disabled   = false;
+  powerupsUsed = 0;
+  powerupBtn.disabled = false;
 
   // difficulty → cols, rows, time, powerups
   const diff = diffSelect.value;
